@@ -4,7 +4,7 @@ import groovy.json.JsonSlurper
 
 
 class BundleHolderClazz {
-    protected Map<String, List<ProjectClazz>> _bundles = [:]
+    // protected Map<String, List<ProjectClazz>> _bundles = [:]
     // String initBundles = """
     //         {
     //     "Van_1": [
