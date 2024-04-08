@@ -11,10 +11,11 @@ class ProjectClazz extends ParentClazz {
         super(pipeline)
     }
 
-    ProjectClazz updateProject(String project, String version, String commit) {
-        this.project = project
-        this.version = version
-        this.commit = commit
+    ProjectClazz createProject(String project, String version, String commit) {
+        ProjectClazz project = ProjectClazz(this)
+        project.project = project
+        project.version = version
+        project.commit = commit
     }
 
     String toJsonString() {
