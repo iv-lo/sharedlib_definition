@@ -37,14 +37,14 @@ class BundleHolderClazz extends ParentClazz {
         _bundles.clear()
         def jsonSlurper = new JsonSlurper()
         def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
-
-        projectsMap.each { projectName, bundlesList ->
-            bundlesList.each { Map bundleInfo ->
-                bundleInfo.each { projectPath, version ->
-                    this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
-                }
-            }
-        }
+        println(projectsMap)
+        // projectsMap.each { projectName, bundlesList ->
+        //     bundlesList.each { Map bundleInfo ->
+        //         bundleInfo.each { projectPath, version ->
+        //             this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
+        //         }
+        //     }
+        // }
     }
 
     List<Map<String, String>> getBundleProjects(String key) {
