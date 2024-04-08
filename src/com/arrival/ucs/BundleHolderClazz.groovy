@@ -73,7 +73,7 @@ class BundleHolderClazz extends ParentClazz {
         projectsMap.each { projectName, bundlesList ->
             bundlesList.each { Map bundleInfo ->
                 bundleInfo.each { projectPath, version ->
-                    this.addBundle(projectName, ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
+                    this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
                 }
             }
         }
