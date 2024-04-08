@@ -12,10 +12,10 @@ class ProjectClazz extends ParentClazz {
     }
 
     ProjectClazz createProject(String project, String version, String commit) {
-        ProjectClazz project = ProjectClazz(this)
-        project.project = project
-        project.version = version
-        project.commit = commit
+        ProjectClazz projectObj = ProjectClazz(this)
+        projectObj.project = project
+        projectObj.version = version
+        projectObj.commit = commit
     }
 
     String toJsonString() {
