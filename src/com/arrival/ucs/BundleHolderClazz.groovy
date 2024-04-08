@@ -44,7 +44,7 @@ class BundleHolderClazz extends ParentClazz {
         super(pipeline)
     }
 
-    @NonCPS
+
     void addBundle(String projectName, ProjectClazz bundle) {
         if (!_bundles.containsKey(projectName)) {
             _bundles[projectName] = []
@@ -64,7 +64,7 @@ class BundleHolderClazz extends ParentClazz {
         return "{\n${bundleStrings}\n}"
     }
 
-    @NonCPS
+
     void initializeFromString(String bundlesProjectsText) {
         _bundles.clear()
         def jsonSlurper = new JsonSlurper()
