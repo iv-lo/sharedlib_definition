@@ -11,7 +11,7 @@ class ProjectClazz extends ParentClazz {
         super(pipeline)
     }
 
-    static ProjectClazz updateProject(String project, String version, String commit) {
+    ProjectClazz updateProject(String project, String version, String commit) {
         this.project = project
         this.version = version
         this.commit = commit
