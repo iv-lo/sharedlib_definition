@@ -38,6 +38,9 @@ class BundleHolderClazz {
     //     holder.initializeFromString(holder.initBundles)
     //     return holder
     // }
+    BundleHolderClazz(def pipeline) {
+        super(pipeline)
+    }
 
     void addBundle(String projectName, ProjectClazz bundle) {
         if (!_bundles.containsKey(projectName)) {
