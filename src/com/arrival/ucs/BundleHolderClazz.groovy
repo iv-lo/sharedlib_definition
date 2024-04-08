@@ -33,18 +33,37 @@ class BundleHolderClazz extends ParentClazz {
     }
 
 
+    // void initializeFromString(String bundlesProjectsText) {
+    //     _bundles.clear()
+    //     def jsonSlurper = new JsonSlurper()
+    //     def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
+    //     println(projectsMap)
+    //     projectsMap.each { projectName, bundlesList ->
+    //         bundlesList.each { Map bundleInfo ->
+    //             bundleInfo.each { projectPath, version ->
+    //                 this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
+    //             }
+    //         }
+    //     }
+    // }
+
     void initializeFromString(String bundlesProjectsText) {
         _bundles.clear()
         def jsonSlurper = new JsonSlurper()
         def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
-        println(projectsMap)
-        // projectsMap.each { projectName, bundlesList ->
-        //     bundlesList.each { Map bundleInfo ->
-        //         bundleInfo.each { projectPath, version ->
-        //             this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
-        //         }
-        //     }
-        // }
+
+        projectsMap.each { projectName, bundlesList ->
+            bundlesList.each { bundleInfo ->
+                // Extracting Component, Version, and Commit from the current bundleInfo map
+                String component = bundleInfo['Component']
+                String version = bundleInfo['Version']
+                String commit = bundleInfo['Commit'] ?: 'now' // Use 'now' as default if Commit is not provided
+                
+                // Correctly calling addBundle with the extracted values
+                // Note: Assuming addBundle and ProjectClazz have been adjusted to handle these parameters correctly
+                this.addBundle(projectName, new ProjectClazz(this.pipeline, component, version, commit))
+            }
+        }
     }
 
     List<Map<String, String>> getBundleProjects(String key) {
