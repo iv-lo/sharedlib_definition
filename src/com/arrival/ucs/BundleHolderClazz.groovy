@@ -1,5 +1,6 @@
 package com.arrival.ucs
 
+import com.arrival.common.ParentClazz
 import groovy.json.JsonSlurper
 
 
