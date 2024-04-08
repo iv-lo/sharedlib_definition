@@ -63,7 +63,7 @@ class BundleHolderClazz extends ParentClazz {
         return "{\n${bundleStrings}\n}"
     }
 
-    void initializeFromString(String bundlesProjectsText) {
+    void initializeFromString() {
         return "Done"
         // _bundles.clear()
         // def jsonSlurper = new JsonSlurper()
@@ -77,6 +77,21 @@ class BundleHolderClazz extends ParentClazz {
         //     }
         // }
     }
+
+    // void initializeFromString(String bundlesProjectsText) {
+    //     return "Done"
+    //     // _bundles.clear()
+    //     // def jsonSlurper = new JsonSlurper()
+    //     // def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
+
+    //     // projectsMap.each { projectName, bundlesList ->
+    //     //     bundlesList.each { Map bundleInfo ->
+    //     //         bundleInfo.each { projectPath, version ->
+    //     //             this.addBundle(projectName, new ProjectClazz(projectPath, version))
+    //     //         }
+    //     //     }
+    //     // }
+    // }
 
     List<Map<String, String>> getBundleProjects(String key) {
         return _bundles.getOrDefault(key, [])
