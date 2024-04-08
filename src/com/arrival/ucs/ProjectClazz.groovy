@@ -6,7 +6,7 @@ class ProjectClazz {
     String version
     String commit
 
-    Project(String project, String version) {
+    ProjectClazz(String project, String version) {
         this.project = project
         this.version = version
     }
