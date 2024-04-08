@@ -3,7 +3,7 @@ package com.arrival.ucs
 import groovy.json.JsonSlurper
 
 
-class BundleHolderClazz {
+class BundleHolderClazz extends ParentClazz {
     // protected Map<String, List<ProjectClazz>> _bundles = [:]
     // String initBundles = """
     //         {
