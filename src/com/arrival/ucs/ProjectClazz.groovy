@@ -16,6 +16,7 @@ class ProjectClazz extends ParentClazz {
         projectObj.project = project
         projectObj.version = version
         projectObj.commit = commit
+        return projectObj
     }
 
     String toJsonString() {
