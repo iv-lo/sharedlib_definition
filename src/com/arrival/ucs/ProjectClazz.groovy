@@ -7,10 +7,10 @@ class ProjectClazz extends ParentClazz {
     String version = 'version'
     String commit = 'commit'
     // , String project, String version
-    ProjectClazz(def pipeline) {
+    ProjectClazz(def pipeline, String project, String version) {
         super(pipeline)
-        // this.project = project
-        // this.version = version
+        this.project = project
+        this.version = version
     }
 
     String toJsonString() {
