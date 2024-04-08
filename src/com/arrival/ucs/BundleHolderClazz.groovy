@@ -44,6 +44,7 @@ class BundleHolderClazz extends ParentClazz {
         super(pipeline)
     }
 
+    @NonCPS
     void addBundle(String projectName, ProjectClazz bundle) {
         if (!_bundles.containsKey(projectName)) {
             _bundles[projectName] = []
