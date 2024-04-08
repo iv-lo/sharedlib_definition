@@ -20,15 +20,29 @@ class BundleHolderClazz extends ParentClazz {
         _bundles[projectName].add(bundle)
     }
 
+    // String toJsonString() {
+    //     def bundleStrings = _bundles.collect { projectName, bundleList ->
+    //         def bundleStrings = bundleList.collect { bundle ->
+    //             "${bundle.toJsonString()}"
+    //         }.join(',\n    ')
+            
+    //         "\"${projectName}\": [\n    ${bundleStrings}\n]"
+    //     }.join(",\n") 
+
+    //     return "{\n${bundleStrings}\n}"
+    // }
     String toJsonString() {
         def bundleStrings = _bundles.collect { projectName, bundleList ->
-            def bundleStrings = bundleList.collect { bundle ->
-                "${bundle.toJsonString()}"
+            // Construct JSON string for each project in the bundle
+            def projectStrings = bundleList.collect { project ->
+                project.toJsonString()
             }.join(',\n    ')
             
-            "\"${projectName}\": [\n    ${bundleStrings}\n]"
+            // Format the JSON string for the projectName with its associated projects
+            return "\"${projectName}\": [\n    ${projectStrings}\n]"
         }.join(",\n") 
 
+        // Wrap the entire collection in curly braces to form a valid JSON object
         return "{\n${bundleStrings}\n}"
     }
 
