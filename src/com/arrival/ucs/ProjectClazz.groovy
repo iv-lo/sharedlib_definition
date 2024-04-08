@@ -3,14 +3,14 @@ package com.arrival.ucs
 import com.arrival.common.ParentClazz
 
 class ProjectClazz extends ParentClazz {
-    String project
-    String version
-    String commit
-
-    ProjectClazz(def pipeline, String project, String version) {
+    String project = 'project'
+    String version = 'version'
+    String commit = 'commit'
+    // , String project, String version
+    ProjectClazz(def pipeline) {
         super(pipeline)
-        this.project = project
-        this.version = version
+        // this.project = project
+        // this.version = version
     }
 
     String toJsonString() {
