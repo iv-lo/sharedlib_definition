@@ -1,7 +1,7 @@
 package com.arrival.ucs
 
 
-class ProjectClazz {
+class ProjectClazz extends ParentClazz {
     String project
     String version
     String commit
