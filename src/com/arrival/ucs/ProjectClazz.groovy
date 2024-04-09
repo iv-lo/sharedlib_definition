@@ -14,9 +14,6 @@ class ProjectClazz extends ParentClazz {
         this.commit = commit
     }
 
-    // String toJsonString() {
-    //     return "{\"${project}\": \"${version}\"}"
-    // }
     String toJsonString() {
         return "{\n" +
             "\t\"Component\": \"${this.project}\",\n" +

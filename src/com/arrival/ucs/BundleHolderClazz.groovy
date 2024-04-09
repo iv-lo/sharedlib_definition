@@ -12,7 +12,6 @@ class BundleHolderClazz extends ParentClazz {
         super(pipeline)
     }
 
-
     void addBundle(String projectName, ProjectClazz bundle) {
         if (!_bundles.containsKey(projectName)) {
             _bundles[projectName] = []
@@ -20,46 +19,17 @@ class BundleHolderClazz extends ParentClazz {
         _bundles[projectName].add(bundle)
     }
 
-    // String toJsonString() {
-    //     def bundleStrings = _bundles.collect { projectName, bundleList ->
-    //         def bundleStrings = bundleList.collect { bundle ->
-    //             "${bundle.toJsonString()}"
-    //         }.join(',\n    ')
-            
-    //         "\"${projectName}\": [\n    ${bundleStrings}\n]"
-    //     }.join(",\n") 
-
-    //     return "{\n${bundleStrings}\n}"
-    // }
     String toJsonString() {
         def bundleStrings = _bundles.collect { projectName, bundleList ->
-            // Construct JSON string for each project in the bundle
             def projectStrings = bundleList.collect { project ->
                 project.toJsonString()
             }.join(',\n    ')
             
-            // Format the JSON string for the projectName with its associated projects
             return "\"${projectName}\": [\n    ${projectStrings}\n]"
         }.join(",\n") 
 
-        // Wrap the entire collection in curly braces to form a valid JSON object
         return "{\n${bundleStrings}\n}"
     }
-
-
-    // void initializeFromString(String bundlesProjectsText) {
-    //     _bundles.clear()
-    //     def jsonSlurper = new JsonSlurper()
-    //     def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
-    //     println(projectsMap)
-    //     projectsMap.each { projectName, bundlesList ->
-    //         bundlesList.each { Map bundleInfo ->
-    //             bundleInfo.each { projectPath, version ->
-    //                 this.addBundle(projectName, new ProjectClazz(this.pipeline, projectPath, version, "now")) //projectPath, version
-    //             }
-    //         }
-    //     }
-    // }
 
     void initializeFromString(String bundlesProjectsText) {
         _bundles.clear()
@@ -68,14 +38,11 @@ class BundleHolderClazz extends ParentClazz {
 
         projectsMap.each { projectName, bundlesList ->
             bundlesList.each { bundleInfo ->
-                // Extracting Component, Version, and Commit from the current bundleInfo map
                 String component = bundleInfo['Component']
                 String version = bundleInfo['Version']
-                String commit = bundleInfo['Commit'] ?: 'now' // Use 'now' as default if Commit is not provided
+                String commit = bundleInfo['Commit'] ?: 'now' 
                 
-                // Correctly calling addBundle with the extracted values
-                // Note: Assuming addBundle and ProjectClazz have been adjusted to handle these parameters correctly
-                this.addBundle(projectName, new ProjectClazz(this.pipeline, component, version, commit))
+                this.addBundle(projectName, new Project(this.pipeline, component, version, commit))
             }
         }
     }
