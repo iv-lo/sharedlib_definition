@@ -42,7 +42,7 @@ class BundleHolderClazz extends ParentClazz {
                 String version = bundleInfo['Version']
                 String commit = bundleInfo['Commit'] ?: 'now' 
                 
-                this.addBundle(projectName, new Project(this.pipeline, component, version, commit))
+                this.addBundle(projectName, new ProjectClazz(this.pipeline, component, version, commit))
             }
         }
     }
