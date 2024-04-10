@@ -12,7 +12,7 @@ class BundleHolderClazz extends ParentClazz {
         super(pipeline)
     }
 
-    void addBundle(String projectName, ProjectClazz bundle) {
+    void addBundle(String projectName, Project bundle) {
         if (!_bundles.containsKey(projectName)) {
             _bundles[projectName] = []
         }
