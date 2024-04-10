@@ -51,4 +51,8 @@ class BundleHolderClazz extends ParentClazz {
         return _bundles.getOrDefault(key, [])
     }
 
+    Set<String> getBundleNames() {
+        return _bundles.keySet()
+    }
+
 }
