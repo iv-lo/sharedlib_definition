@@ -52,7 +52,7 @@ class BundleHolderClazz extends ParentClazz {
     }
 
     Set<String> getBundleNames() {
-        return _bundles.keySet()
+        return new ArrayList<>(_bundles.keySet())
     }
 
 }
