@@ -5,7 +5,7 @@ import groovy.json.JsonSlurper
 
 
 class BundleHolderClazz extends ParentClazz {
-    protected Map<String, List<ProjectClazz>> _bundles = [:]
+    protected Map<String, List<Project>> _bundles = [:]
     String initBundles = ""
    
     BundleHolderClazz(def pipeline) {
