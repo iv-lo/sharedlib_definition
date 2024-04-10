@@ -6,7 +6,8 @@ import groovy.json.JsonSlurper
 
 class BundleHolderClazz extends ParentClazz {
     protected Map<String, List<Project>> _bundles = [:]
-    String initBundles = ""
+    String initBundles
+    String defaultVehicle
    
     BundleHolderClazz(def pipeline) {
         super(pipeline)
@@ -82,6 +83,12 @@ class BundleHolderClazz extends ParentClazz {
 
     Set<String> getBundleNames() {
         return new ArrayList<>(_bundles.keySet())
+    }
+
+    List<String> getVehicleList(Map projectsBuncleMap) {
+        List<String> result = projectsBuncleMap.keySet() as List<String>
+        result -= this.defaultVehicle
+        return [this.defaultVehicle] + result
     }
 
 }
