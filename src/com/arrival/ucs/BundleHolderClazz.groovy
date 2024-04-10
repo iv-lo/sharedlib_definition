@@ -85,8 +85,8 @@ class BundleHolderClazz extends ParentClazz {
         return new ArrayList<>(_bundles.keySet())
     }
 
-    List<String> getVehicleList(Map projectsBuncleMap) {
-        List<String> result = projectsBuncleMap.keySet() as List<String>
+    List<String> getVehicleList() {
+        List<String> result = this._bundles.keySet() as List<String>
         result -= this.defaultVehicle
         return [this.defaultVehicle] + result
     }
