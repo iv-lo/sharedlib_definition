@@ -71,7 +71,7 @@ class BundleHolderClazz extends ParentClazz {
                 String version = parts[1]
                 String commit = parts.length > 2 ? parts[2] : 'now' // Default to 'now' if commit is not specified
 
-                this.addBundle(projectName, new ProjectClazz(this.pipeline, component, version, commit))
+                this.addBundle(projectName, new Project(this.pipeline, component, version, commit))
             }
         }
     }

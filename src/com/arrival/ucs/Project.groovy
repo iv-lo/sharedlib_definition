@@ -2,12 +2,12 @@ package com.arrival.ucs
 
 import com.arrival.common.ParentClazz
 
-class ProjectClazz extends ParentClazz {
+class Project extends ParentClazz {
     String project
     String version
     String commit
 
-    ProjectClazz(def pipeline, String project, String version, String commit) {
+    Project(def pipeline, String project, String version, String commit) {
         super(pipeline)
         this.project = project
         this.version = version
