@@ -56,25 +56,20 @@ class BundleHolderClazz extends ParentClazz {
     // }
     void initializeFromString(String bundlesProjectsText) {
         _bundles.clear()
-        def jsonSlurper = new JsonSlurper()
-        def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
+        def projectsMap = Eval.me(bundlesProjectsText)
 
         projectsMap.each { projectName, bundleStrings ->
-            // Preparing a list to hold Project instances for the current projectName
-            List<Project> projectsList = []
+            List<ProjectClazz> projectsList = []
 
             bundleStrings.each { bundleString ->
-                // Splitting the string to extract component, version, and commit
                 def parts = bundleString.split(/\s+/)
                 String component = parts[0]
-                String version = parts.length > 1 ? parts[1] : "unknown" // Default to "unknown" if version is not specified
-                String commit = parts.length > 2 ? parts[2] : 'now' // Default to 'now' if commit is not specified
+                String version = parts.length > 1 ? parts[1] : "unknown"
+                String commit = parts.length > 2 ? parts[2] : 'now'
 
-                // Creating a new Project instance and adding it to the projectsList
-                projectsList.add(new Project(this.pipeline, component, version, commit))
+                projectsList.add(new ProjectClazz(this.pipeline, component, version, commit))
             }
 
-            // Adding the projectsList to the _bundles map for the current projectName
             _bundles[projectName] = projectsList
         }
     }
