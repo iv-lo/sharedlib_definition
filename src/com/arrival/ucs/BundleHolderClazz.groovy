@@ -11,12 +11,12 @@ class BundleHolderClazz extends ParentClazz {
         super(pipeline)
     }
 
-    void addBundle(String projectName, Project bundle) {
-        if (!_bundles.containsKey(projectName)) {
-            _bundles[projectName] = []
-        }
-        _bundles[projectName].add(bundle)
-    }
+    // void addBundle(String projectName, Project bundle) {
+    //     if (!_bundles.containsKey(projectName)) {
+    //         _bundles[projectName] = []
+    //     }
+    //     _bundles[projectName].add(bundle)
+    // }
 
     Map toMapString() {
         return _bundles.collectEntries { vehicleName, projectList ->
@@ -43,7 +43,7 @@ class BundleHolderClazz extends ParentClazz {
         }
     }
 
-    List<Map<String, String>> getBundleProjects(String key) {
+    List<Project> getBundleProjects(String key) {
         return _bundles.getOrDefault(key, [])
     }
 
