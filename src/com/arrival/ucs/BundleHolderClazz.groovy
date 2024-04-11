@@ -1,8 +1,6 @@
 package com.arrival.ucs
 
 import com.arrival.common.ParentClazz
-import groovy.json.JsonSlurper
-
 
 class BundleHolderClazz extends ParentClazz {
     protected Map<String, List<Project>> _bundles = [:]
@@ -20,17 +18,6 @@ class BundleHolderClazz extends ParentClazz {
         _bundles[projectName].add(bundle)
     }
 
-    // String toJsonString() {
-    //     def bundleStrings = _bundles.collect { projectName, bundleList ->
-    //         def projectStrings = bundleList.collect { project ->
-    //             project.toJsonString()
-    //         }.join(',\n    ')
-            
-    //         return "\"${projectName}\": [\n    ${projectStrings}\n]"
-    //     }.join(",\n") 
-
-    //     return "{\n${bundleStrings}\n}"
-    // }
     Map toMapString() {
         return _bundles.collectEntries { vehicleName, projectList ->
             [vehicleName, projectList.collect { project ->
@@ -39,72 +26,25 @@ class BundleHolderClazz extends ParentClazz {
         }
     }
 
-    // void initializeFromString(String bundlesProjectsText) {
-    //     _bundles.clear()
-    //     def jsonSlurper = new JsonSlurper()
-    //     def projectsMap = jsonSlurper.parseText(bundlesProjectsText)
+    void updateBundleProjects(String vehicleName, String projectsText) {
+        _bundles[vehicleName] = []
 
-    //     projectsMap.each { projectName, bundlesList ->
-    //         bundlesList.each { bundleInfo ->
-    //             String component = bundleInfo['Component']
-    //             String version = bundleInfo['Version']
-    //             String commit = bundleInfo['Commit'] ?: 'now' 
-                
-    //             this.addBundle(projectName, new ProjectClazz(this.pipeline, component, version, commit))
-    //         }
-    //     }
-    // }
-    // void initializeFromString(String bundlesProjectsText) {
-    //     _bundles.clear()
-    //     def projectsMap = Eval.me(bundlesProjectsText)
-
-    //     projectsMap.each { projectName, bundleStrings ->
-    //         List<Project> projectsList = []
-
-    //         bundleStrings.each { bundleString ->
-    //             def parts = bundleString.split(/\s+/)
-    //             String component = parts[0]
-    //             String version = parts.length > 1 ? parts[1] : "unknown"
-    //             String commit = parts.length > 2 ? parts[2] : 'now'
-
-    //             projectsList.add(new Project(this.pipeline, component, version, commit))
-    //         }
-
-    //         _bundles[projectName] = projectsList
-    //     }
-    // }
-    void updateBundleProjects(String bundleName, String projectsText) {
-        // Check if the specified bundle exists; if not, initialize it as an empty list
-        if (!_bundles.containsKey(bundleName)) {
-            _bundles[bundleName] = []
-        } else {
-            // If the bundle exists, clear its current list of projects
-            _bundles[bundleName].clear()
-        }
-
-        // Split the input text into individual project strings
         def projectStrings = projectsText.split("\\n")
-
-        // Iterate over each project string to create and add new Project instances
         projectStrings.each { projectString ->
-            if (!projectString.trim().isEmpty()) { // Skip empty lines
+            if (!projectString.trim().isEmpty()) {
                 def parts = projectString.split(/\s+/)
+
                 String component = parts[0]
-                String version = parts.length > 1 ? parts[1] : "unknown"
+                String version = parts.length > 1 ? parts[1] : "main"
                 String commit = parts.length > 2 ? parts[2] : 'now'
 
-                // Create a new Project instance and add it to the specified bundle
-                _bundles[bundleName].add(new Project(this.pipeline, component, version, commit))
+                _bundles[vehicleName].add(new Project(this.pipeline, component, version, commit))
             }
         }
     }
 
     List<Map<String, String>> getBundleProjects(String key) {
         return _bundles.getOrDefault(key, [])
-    }
-
-    Set<String> getBundleNames() {
-        return new ArrayList<>(_bundles.keySet())
     }
 
     List<String> getVehicleList() {
