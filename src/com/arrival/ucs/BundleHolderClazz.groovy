@@ -31,15 +31,12 @@ class BundleHolderClazz extends ParentClazz {
 
     //     return "{\n${bundleStrings}\n}"
     // }
-    Map toJsonString() {
-        def bundlesMap = _bundles.collectEntries { projectName, bundleList ->
-
-            [projectName, bundleList.collect { project ->
-                project.toJsonString()
+    Map toMapString() {
+        return _bundles.collectEntries { vehicleName, projectList ->
+            [vehicleName, projectList.collect { project ->
+                project.toMapString()
             }]
         }
-
-        return bundlesMap
     }
 
     // void initializeFromString(String bundlesProjectsText) {
