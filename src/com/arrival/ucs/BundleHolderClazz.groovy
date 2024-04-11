@@ -59,7 +59,7 @@ class BundleHolderClazz extends ParentClazz {
         def projectsMap = Eval.me(bundlesProjectsText)
 
         projectsMap.each { projectName, bundleStrings ->
-            List<ProjectClazz> projectsList = []
+            List<Project> projectsList = []
 
             bundleStrings.each { bundleString ->
                 def parts = bundleString.split(/\s+/)
@@ -67,7 +67,7 @@ class BundleHolderClazz extends ParentClazz {
                 String version = parts.length > 1 ? parts[1] : "unknown"
                 String commit = parts.length > 2 ? parts[2] : 'now'
 
-                projectsList.add(new ProjectClazz(this.pipeline, component, version, commit))
+                projectsList.add(new Project(this.pipeline, component, version, commit))
             }
 
             _bundles[projectName] = projectsList
