@@ -22,7 +22,7 @@ class Project extends ParentClazz {
     //         "}"
     // }
     String toJsonString() {
-        return "${this.project} ${this.version} ${this.commit}"
+        return "\'${this.project} ${this.version} ${this.commit}\'"
     }
 
     String toWorkspaceCfgLink(){
