@@ -41,7 +41,7 @@ class BundleHolderClazz extends ParentClazz {
             return "\"${projectName}\": [\n    ${projectStrings}\n]"
         }.join(",\n") 
 
-        return "{\n${bundleStrings}\n}"
+        return "${bundleStrings}"
     }
 
     // void initializeFromString(String bundlesProjectsText) {
