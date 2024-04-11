@@ -54,23 +54,48 @@ class BundleHolderClazz extends ParentClazz {
     //         }
     //     }
     // }
-    void initializeFromString(String bundlesProjectsText) {
-        _bundles.clear()
-        def projectsMap = Eval.me(bundlesProjectsText)
+    // void initializeFromString(String bundlesProjectsText) {
+    //     _bundles.clear()
+    //     def projectsMap = Eval.me(bundlesProjectsText)
 
-        projectsMap.each { projectName, bundleStrings ->
-            List<Project> projectsList = []
+    //     projectsMap.each { projectName, bundleStrings ->
+    //         List<Project> projectsList = []
 
-            bundleStrings.each { bundleString ->
-                def parts = bundleString.split(/\s+/)
+    //         bundleStrings.each { bundleString ->
+    //             def parts = bundleString.split(/\s+/)
+    //             String component = parts[0]
+    //             String version = parts.length > 1 ? parts[1] : "unknown"
+    //             String commit = parts.length > 2 ? parts[2] : 'now'
+
+    //             projectsList.add(new Project(this.pipeline, component, version, commit))
+    //         }
+
+    //         _bundles[projectName] = projectsList
+    //     }
+    // }
+    void updateBundleProjects(String bundleName, String projectsText) {
+        // Check if the specified bundle exists; if not, initialize it as an empty list
+        if (!_bundles.containsKey(bundleName)) {
+            _bundles[bundleName] = []
+        } else {
+            // If the bundle exists, clear its current list of projects
+            _bundles[bundleName].clear()
+        }
+
+        // Split the input text into individual project strings
+        def projectStrings = projectsText.split("\\n")
+
+        // Iterate over each project string to create and add new Project instances
+        projectStrings.each { projectString ->
+            if (!projectString.trim().isEmpty()) { // Skip empty lines
+                def parts = projectString.split(/\s+/)
                 String component = parts[0]
                 String version = parts.length > 1 ? parts[1] : "unknown"
                 String commit = parts.length > 2 ? parts[2] : 'now'
 
-                projectsList.add(new Project(this.pipeline, component, version, commit))
+                // Create a new Project instance and add it to the specified bundle
+                _bundles[bundleName].add(new Project(this.pipeline, component, version, commit))
             }
-
-            _bundles[projectName] = projectsList
         }
     }
 
