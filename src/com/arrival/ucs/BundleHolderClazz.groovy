@@ -4,19 +4,11 @@ import com.arrival.common.ParentClazz
 
 class BundleHolderClazz extends ParentClazz {
     protected Map<String, List<Project>> _bundles = [:]
-    String initBundles
-    String defaultVehicle
+    protected String _defaultVehicle
    
     BundleHolderClazz(def pipeline) {
         super(pipeline)
     }
-
-    // void addBundle(String projectName, Project bundle) {
-    //     if (!_bundles.containsKey(projectName)) {
-    //         _bundles[projectName] = []
-    //     }
-    //     _bundles[projectName].add(bundle)
-    // }
 
     Map toMapString() {
         return _bundles.collectEntries { vehicleName, projectList ->
@@ -49,8 +41,8 @@ class BundleHolderClazz extends ParentClazz {
 
     List<String> getVehicleList() {
         List<String> result = this._bundles.keySet() as List<String>
-        result -= this.defaultVehicle
-        return [this.defaultVehicle] + result
+        result -= this._defaultVehicle
+        return [this._defaultVehicle] + result
     }
 
 }
